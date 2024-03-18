@@ -11,6 +11,7 @@
 
 void adc_1_task(void *p) {
     adc_init();
+    adc_gpio_init(26);
     adc_gpio_init(27);
 
     // 12-bit conversion, assume max value == ADC_VREF == 3.3 V
@@ -23,6 +24,10 @@ void adc_1_task(void *p) {
         printf("voltage 1: %f V\n", result * conversion_factor);
 
         // CÓDIGO AQUI
+
+        adc_select_input(0); // Select ADC input 1 (GPIO27)
+        result = adc_read();
+        printf("voltage 2: %f V\n", result * conversion_factor);
 
 
 
